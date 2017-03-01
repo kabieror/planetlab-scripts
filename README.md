@@ -53,3 +53,13 @@ You can delete all data on all nodes you were using by executing
 ```
 clean.sh
 ```
+
+### test-nodes.sh: Test nodes for accessability
+If you have a text file which contains the addresses of nodes, on in each line, you can test, to which of them you have access, by executing:
+```
+test-nodes.sh all-known-nodes.txt
+```
+This will print the address of a node, if it is accessible via SSH. You can for example use it, to generate a new nodes.txt:
+```
+test-nodes.sh all-known-nodes.txt > nodes.txt
+```
