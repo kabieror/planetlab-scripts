@@ -10,3 +10,4 @@ username=diku_INF5510v17
 
 ssh="ssh -o StrictHostKeyChecking=no -o PasswordAuthentication=no"
 scp="scp -o StrictHostKeyChecking=no -o PasswordAuthentication=no"
+id=`echo $wd | sed 's!/!!g'`

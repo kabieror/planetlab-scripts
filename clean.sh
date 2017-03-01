@@ -11,7 +11,7 @@ fi
 
 function clean {
   echo "-- $1 - Cleaning started..."
-  output=`$ssh $username@$1 "rm -rf $wd; screen -XS oke quit >/dev/null 2>&1" 2>&1`
+  output=`$ssh $username@$1 "rm -rf $wd; screen -XS $id quit >/dev/null 2>&1" 2>&1`
   if [[ $output == "" ]]; then
     echo "-- $1 - Success"
   else
