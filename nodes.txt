@@ -1,0 +1,12 @@
+# 1.: Source-Node
+# Here, main.x will be executed, when all other nodes are running.
+planetlab4.mini.pw.edu.pl
+
+# 2.: Reference-Node
+# This will be the first node to start up. All other nodes will connect to it.
+planetlab-05.cs.princeton.edu
+
+planetlab-5.eecs.cwru.edu
+planetlab1.cs.ubc.ca
+planetlab1.unr.edu
+
