@@ -8,14 +8,14 @@ if [[ $wd == "" ]]; then
   exit 1
 fi
 
-rm -f node-oke.tar
-cd node-oke && tar --dereference -cf ../node-oke.tar . || (echo "Error while creating the archive"; exit 1)
+rm -f node-data.tar
+cd node-data && tar --dereference -cf ../node-data.tar . || (echo "Error while creating the archive"; exit 1)
 cd ../
 
 function install {
   echo "-- $1 - Update started..."
 
-  scp -q node-oke.tar $username@$1:$wd/node.tar
+  scp -q node-data.tar $username@$1:$wd/node.tar
   output=`ssh $username@$1 "cd $wd && tar -xf node.tar" 2>&1`
   if [[ $output == "" ]]; then
     echo "-- $1 - Success"
