@@ -14,7 +14,8 @@ wd=/tmp/yourname
 Copy or link the program you want to run on the PlanetLab nodes to `node-data/main.x`.
 For example:
 ```
-ln -s ../uni/distobj/kilroy.x ./node-data/main.x
+cd node-data
+ln -s ../../uni/distobj/kilroy.x main.x
 ```
 
 ## 3. Specify nodes
@@ -36,8 +37,8 @@ This will start all nodes and run the Emerald program on the last one to start u
 For subsequent starts you can use the `-f` switch. It will only restart the main node.
 ```
 start.sh [OPTIONS]
-  -f  Fast start
-      Only starts the main node and connects to the reference node, which is still running from the previous launch.
+  -f
+      Fast Start. Only starts the main node and connects to the reference node, which is still running from the previous launch.
 ```
 
 ### output.sh: Watch the output of a specific node
@@ -50,8 +51,8 @@ output.sh address.of.node.tdl
 If you have made changes to your program, you have to update the file on the nodes.
 ```
 update.sh [OPTIONS]
-  -f  Fast update
-      Only updates the main node.
+  -f
+      Fast Start. Only updates the main node.
 ```
 
 ### stop.sh: Stop Emerald on all the nodes
