@@ -31,10 +31,14 @@ install.sh
 ```
 
 ### start.sh: Launch Emerald on all the nodes
-```
-start.sh
-```
 This will start all nodes and run the Emerald program on the last one to start up (the first one in nodes.txt). Note that the emerald VMs will continue running after the program finished. But if you run `start.sh` for the next time, the previously started VMs will be killed.
+
+For subsequent starts you can use the `-f` switch. It will only restart the main node.
+```
+start.sh [OPTIONS]
+  -f  Fast start
+      Only starts the main node and connects to the reference node, which is still running from the previous launch.
+```
 
 ### output.sh: Watch the output of a specific node
 To watch the output, a specific node is producing, you can watch the file `output.log` in your working directory. There is a script, that takes the address of a node and opens the program `less` there, which allows watching the outputs of that file:
@@ -45,7 +49,9 @@ output.sh address.of.node.tdl
 ### update.sh: Update Emerald program on all the nodes
 If you have made changes to your program, you have to update the file on the nodes.
 ```
-update.sh
+update.sh [OPTIONS]
+  -f  Fast update
+      Only updates the main node.
 ```
 
 ### stop.sh: Stop Emerald on all the nodes
