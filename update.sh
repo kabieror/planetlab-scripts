@@ -29,6 +29,10 @@ while read host; do
     continue
   fi
   install $host &
+  if [[ $1 == '-f' ]]; then
+    # Fast mode set.
+    break;
+  fi
 done < nodes.txt
 
 # Wait for all installation processes to finish

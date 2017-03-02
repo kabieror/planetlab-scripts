@@ -10,6 +10,17 @@ fi
 
 startnode=
 connectstring=
+fast=false
+
+if [[ $1 == "-f" ]]; then
+  connectstring=`cat .connectstring`
+  if [[ $connectstring == "" ]]; then
+    echo "No previous execution. Please start without '-f' flag."
+    exit 1
+  fi
+  fast=true
+fi
+
 
 function async_start {
   echo "-- $1 - Connecting to $connectstring..."
@@ -20,7 +31,6 @@ function async_start {
     echo -e "-- $1 - Error\n$output"
   fi
 }
-
 
 while read host; do
   if [[ $host =~ ^#.* ]] || [[ $host == '' ]]; then
@@ -33,6 +43,10 @@ while read host; do
   if [[ $startnode == $host ]]; then
     continue
   fi
+  if [[ $fast == true ]]; then
+    # If fast mode is set, do not start all nodes except the main node
+    break
+  fi
   if [[ $connectstring == '' ]]; then
     # Start first instance
     echo "-- $host - Starting up"
@@ -40,6 +54,7 @@ while read host; do
     if [[ $startres =~ port[[:space:]]([[:digit:]]+) ]]; then
       echo "-- $host - Started on port ${BASH_REMATCH[1]}"
       connectstring="$host:${BASH_REMATCH[1]}"
+      echo "$connectstring" > .connectstring
     else
       echo "-- $host - Could not start as first node."
       echo "$startres"
