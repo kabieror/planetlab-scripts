@@ -16,10 +16,15 @@ outfile=$wd/output.log
 echo "" > $outfile
 
 # Start new instance
+runstring=
 if [[ $run == true ]]; then
-  emx -U -R$1 main.x
+  runstring=' main.x'
+fi
+screen -dmS $id bash -c "script -c 'emx -U -R$1$runstring 2>&1' -f $outfile"
+
+if [[ $run == true ]]; then
+  tail -f $outfile
 else
-  screen -dmS $id bash -c "script -c 'emx -U -R$1 2>&1' -f $outfile"
   # Wait for output of emx telling listening port
   for i in {1..4}; do
     output=$(cat $outfile | grep "Emerald listening" | head -n 1)
