@@ -14,5 +14,9 @@ if [[ $1 == "" ]]; then
   exit 1
 fi
 
+clear
+
+printf '\033]2;%s\033\\' "$1"
+
 $ssh -t $username@$1 "cd $wd; source ./.config; bash -l"
 

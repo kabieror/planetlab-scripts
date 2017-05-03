@@ -14,5 +14,7 @@ if [[ $1 == "" ]]; then
   exit 1
 fi
 
+clear
+
 $ssh -t $username@$1 "tail --follow=name $wd/output.log"
 

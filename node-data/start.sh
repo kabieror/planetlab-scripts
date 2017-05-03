@@ -18,7 +18,7 @@ echo "" > $outfile
 # Start new instance
 runstring=
 if [[ $run == true ]]; then
-  runstring=' main.x'
+  runstring=' Utils.x LogManager.x AsyncCollector.x Synchronizer.x Replication.x Main.x'
 fi
 screen -dmS $id bash -c "script -c 'emx -U -R$1$runstring 2>&1' -f $outfile"
 

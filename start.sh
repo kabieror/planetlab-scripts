@@ -21,12 +21,16 @@ if [[ $1 == "-f" ]]; then
   fast=true
 fi
 
+if [[ $fast == false ]]; then
+  echo "" > .workingnodes
+fi
 
 function async_start {
   echo "-- $1 - Connecting to $connectstring..."
   output=`$ssh $username@$1 "bash $wd/start.sh $connectstring" 2>&1`
   if [[ $output == "" ]] || [[ $output =~ port[[:space:]]([[:digit:]]+) ]] ; then
     echo "-- $1 - Started with connection to first node"
+    echo $1 >> .workingnodes
   else
     echo -e "-- $1 - Error\n$output"
   fi
@@ -55,6 +59,7 @@ while read host; do
       echo "-- $host - Started on port ${BASH_REMATCH[1]}"
       connectstring="$host:${BASH_REMATCH[1]}"
       echo "$connectstring" > .connectstring
+      echo $host >> .workingnodes
     else
       echo "-- $host - Could not start as first node."
       echo "$startres"
